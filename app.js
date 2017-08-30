@@ -15,8 +15,8 @@ var commentRoutes = require("./routes/comment");
 var campgroundRoutes = require("./routes/campground");
 var indexRoutes = require("./routes/index");
 
-//mongoose.connect("mongodb://localhost/yelpcamp", { useMongoClient: true });
-mongoose.connect("mongodb://shubham:12345@ds163613.mlab.com:63613/yelpcamp12345", { useMongoClient: true });
+mongoose.connect(process.env.DATABASEURL, { useMongoClient: true });
+//mongoose.connect("mongodb://shubham:12345@ds163613.mlab.com:63613/yelpcamp12345", { useMongoClient: true });
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
