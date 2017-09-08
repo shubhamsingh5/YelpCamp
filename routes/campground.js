@@ -1,7 +1,8 @@
-var express= require("express");
-var router= express.Router();
-var Campground= require('../models/campground');
-var middleware= require('../middleware');
+var express = require("express");
+var router  = express.Router();
+var Campground = require("../models/campground");
+var Comment = require("../models/comment");
+var middleware = require("../middleware");
 var geocoder = require('geocoder');
 
 //INDEX - show all campgrounds
@@ -73,7 +74,7 @@ res.render("campgrounds/edit", {campground: foundCampground});
 });
 
 //UPDATE ROUTE
-router.put("/:id", function(req, res){
+router.put("/campgrounds/:id", middleware.checkCampgroundOwnership, function(req, res){
   geocoder.geocode(req.body.location, function (err, data) {
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
